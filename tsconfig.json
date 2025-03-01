@@ -5,7 +5,8 @@
 		"lib": ["es2022", "dom", "dom.iterable"],
 		"paths": {
 			"@/*": ["src/*"]
-		}
+		},
+		"types": ["@cloudflare/workers-types/2023-07-01"]
 	},
 	"include": [".astro/types.d.ts", "**/*"],
 	"exclude": ["node_modules", "**/node_modules/*", ".vscode", "dist"]

@@ -6,7 +6,7 @@ import expressiveCode from "astro-expressive-code";
 import icon from "astro-icon";
 import robotsTxt from "astro-robots-txt";
 import webmanifest from "astro-webmanifest";
-import { defineConfig, envField } from "astro/config";
+import { defineConfig, envField , sharpImageService } from "astro/config";
 import { expressiveCodeOptions } from "./src/site.config";
 import { siteConfig } from "./src/site.config";
 
@@ -26,6 +26,7 @@ export default defineConfig({
 	site: siteConfig.url,
 	image: {
 		domains: ["webmention.io"],
+  service : sharpImageService()
 	},
 	integrations: [
 		expressiveCode(expressiveCodeOptions),
