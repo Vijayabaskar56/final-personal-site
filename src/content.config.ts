@@ -27,6 +27,7 @@ const post = defineCollection({
 				.string()
 				.or(z.date())
 				.transform((val) => new Date(val)),
+			stats: z.string().optional(),
 			updatedDate: z
 				.string()
 				.optional()

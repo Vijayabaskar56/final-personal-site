@@ -4,6 +4,7 @@ description: Compilers are complex systems that translate high-level programming
 publishDate: "01 Feb 2025"
 tags: ["markdown", "admonitions"]
 draft : false
+stats : 14k
 ---
 
 
