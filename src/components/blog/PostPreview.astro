@@ -9,7 +9,6 @@ type Props<Tag extends HTMLTag> = Polymorphic<{ as: Tag }> & {
 };
 
 const { as: Tag = "div", post, withDesc = false } = Astro.props;
-console.log(post, "findme");
 ---
 
 <FormattedDate
