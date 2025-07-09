@@ -1,4 +1,6 @@
 ---
+import { Image } from "astro:assets";
+import img from "@/assets/mountains-8314422.svg";
 import PageLayout from "@/layouts/Base.astro";
 
 const meta = {
@@ -9,28 +11,16 @@ const meta = {
 
 <PageLayout meta={meta}>
 	<h1 class="title mb-6">About</h1>
-	<div class="prose prose-sm prose-cactus max-w-none">
-		<p>
-			Hi, I’m a starter Astro. I’m particularly great for getting you started with your own blogging
-			website.
-		</p>
-		<p>Here are my some of my awesome built in features:</p>
-		<ul class="list-inside list-disc" role="list">
-			<li>I'm ultra fast as I'm a static site</li>
-			<li>I'm fully responsive</li>
-			<li>I come with a light and dark mode</li>
-			<li>I'm easy to customise and add additional content</li>
-			<li>I have Tailwind CSS styling</li>
-			<li>Shiki code syntax highlighting</li>
-			<li>Satori for auto generating OG images for blog posts</li>
-		</ul>
-		<p>
-			Clone or fork my <a
-				class="cactus-link inline-block"
-				href="https://github.com/chrismwilliams/astro-cactus"
-				rel="noreferrer"
-				target="_blank">repo</a
-			> if you like me!
-		</p>
-	</div>
+	<Image class="lg:float-right lg:ml-4 lg:w-2/5" src={img} alt="mountains" />
+
+	<p class="leading-[30px]">
+		Hey, I am <span style="color: #cb5c40;">Vijayabaskar</span>, a Full Stack Developer from India.
+		Passionate about breaking and building things from a young age, I have always been fascinated by
+		understanding how things work and rebuilding them. Programming became my ultimate playground for
+		this curiosity. I tackle challenges head-on, always finding solutions even in uncharted
+		territories. As a tech enthusiast, I stay updated with the latest trends. My team-oriented and
+		friendly nature allows me to fit seamlessly into any collaborative environment. I love engaging
+		in nerdy conversations about tech, morals, philosophy, and anime. Let's connect to build awesome
+		stuff and have crazy nerdy talks!
+	</p>
 </PageLayout>
