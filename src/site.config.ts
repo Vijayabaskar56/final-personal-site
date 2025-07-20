@@ -1,5 +1,5 @@
-import type { SiteConfig } from "@/types";
 import type { AstroExpressiveCodeOptions } from "astro-expressive-code";
+import type { SiteConfig } from "@/types";
 
 export const siteConfig: SiteConfig = {
 	// Used as both a meta property (src/components/BaseHead.astro L:31 + L:49) & the generated satori png (src/pages/og-image/[slug].png.ts)
@@ -47,10 +47,6 @@ export const menuLinks: { path: string; title: string }[] = [
 		path: "/projects/",
 		title: "projects",
 	},
-	{
-		path: "/videos/",
-		title: "videos",
-	},
 ];
 
 // https://expressive-code.com/reference/configuration/
@@ -72,8 +68,11 @@ export const expressiveCodeOptions: AstroExpressiveCodeOptions = {
 		// generate theme CSS selectors compatible with cactus-theme dark mode switch
 		if (styleVariants.length >= 2) {
 			const baseTheme = styleVariants[0]?.theme;
-			const altTheme = styleVariants.find((v) => v.theme.type !== baseTheme?.type)?.theme;
-			if (theme === baseTheme || theme === altTheme) return `[data-theme='${theme.type}']`;
+			const altTheme = styleVariants.find(
+				(v) => v.theme.type !== baseTheme?.type,
+			)?.theme;
+			if (theme === baseTheme || theme === altTheme)
+				return `[data-theme='${theme.type}']`;
 		}
 		// return default selector
 		return `[data-theme="${theme.name}"]`;

@@ -23,7 +23,7 @@
 		"@astrojs/rss": "4.0.12",
 		"@astrojs/sitemap": "3.4.1",
 		"@img/sharp-win32-x64": "^0.33.5",
-		"@tailwindcss/vite": "4.1.11",
+		"@tailwindcss/vite": "^4.1.11",
 		"astro": "5.11.0",
 		"astro-expressive-code": "^0.41.3",
 		"astro-icon": "^1.1.5",
@@ -40,7 +40,8 @@
 		"remark-directive": "^3.0.1",
 		"satori": "0.15.2",
 		"satori-html": "^0.3.2",
-		"sharp": "^0.32.6",
+		"sharp": "^0.34.3",
+		"twitter-api-v2": "^1.24.0",
 		"unified": "^11.0.5",
 		"unist-util-visit": "^5.0.0"
 	},
@@ -60,16 +61,8 @@
 		"prettier-plugin-astro": "0.14.1",
 		"prettier-plugin-tailwindcss": "^0.6.14",
 		"reading-time": "^1.5.0",
-		"tailwindcss": "4.1.0",
+		"tailwindcss": "^4.1.11",
 		"typescript": "^5.8.3",
 		"wrangler": "^3.114.11"
-	},
-	"pnpm": {
-		"onlyBuiltDependencies": [
-			"@biomejs/biome",
-			"esbuild",
-			"sharp",
-			"workerd"
-		]
 	}
 }

@@ -16,7 +16,7 @@ const { as: Tag = "div", post, withDesc = false } = Astro.props;
 	date={post.data.publishDate}
 />
 <Tag
-	class="grid [grid-template-columns:auto_1fr_auto] items-center gap-2 sm:[grid-template-columns:auto_auto_1fr_auto]"
+	class="grid grid-cols-[auto_1fr_auto] items-center gap-2 sm:grid-cols-[auto_auto_1fr_auto]"
 >
 	{post.data.draft && <span class="text-red-500">(Draft) </span>}
 	<a class="cactus-link" data-astro-prefetch href={`/posts/${post.id}/`}>
@@ -24,7 +24,7 @@ const { as: Tag = "div", post, withDesc = false } = Astro.props;
 	</a>
 	<span></span>
 	<div
-		class="block h-px [background-image:linear-gradient(90deg,var(--ui-border-color)_1px,transparent_1px)] bg-[length:4px_1px] bg-bottom bg-repeat-x [--ui-border-color:theme(colors.gray.300)] dark:[--ui-border-color:theme(colors.gray.700)]"
+		class="block h-px bg-[linear-gradient(90deg,var(--ui-border-color)_1px,transparent_1px)] bg-size-[4px_1px] bg-bottom bg-repeat-x [--ui-border-color:var(--color-gray-300)] dark:[--ui-border-color:var(--color-gray-700)]"
 	>
 	</div>
 	{

@@ -1,13 +1,53 @@
 ---
+import { getCollection } from "astro:content";
+import ProjectCard from "@/components/ProjectCard.astro";
 import PageLayout from "@/layouts/Base.astro";
 
 const meta = {
-	description: "Oops! It looks like this page is lost in space!",
-	title: "Oops! You found a missing page!",
+	description: "Explore my projects and creative work",
+	title: "Projects",
 };
+
+// Get all projects
+const allProjects = await getCollection("project");
+const sortedProjects = allProjects.sort((a, b) => {
+	// Sort by year first (newest first), then by title
+	const yearA = parseInt(a.data.year);
+	const yearB = parseInt(b.data.year);
+	if (yearA !== yearB) return yearB - yearA;
+	return a.data.title.localeCompare(b.data.title);
+});
 ---
 
 <PageLayout meta={meta}>
-	<h1 class="title mb-6">Under Construction , Will Update Soon</h1>
-	<p class="mb-8">Please use the navigation to find your way back</p>
+	<section>
+		<h1 class="title mb-6">Projects</h1>
+		<p class="mb-8 text-zinc-600 dark:text-zinc-400">
+			A collection of my creative work, experiments, and projects. Each project represents a
+			learning journey and a step towards building something meaningful.
+		</p>
+
+		{
+			allProjects.length > 0 ? (
+				<div class="grid gap-6 sm:grid-cols-1 lg:grid-cols-2">
+					{sortedProjects.map((project) => (
+						<ProjectCard project={project} isPreview={true} />
+					))}
+				</div>
+			) : (
+				<div class="rounded-lg border border-zinc-200 bg-white p-12 text-center dark:border-zinc-700 dark:bg-zinc-800">
+					<div class="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-zinc-100 dark:bg-zinc-700">
+						<span class="text-2xl">🚀</span>
+					</div>
+					<h3 class="mb-2 text-lg font-semibold text-zinc-900 dark:text-zinc-100">
+						Projects Coming Soon
+					</h3>
+					<p class="text-zinc-600 dark:text-zinc-400">
+						I'm currently working on some exciting projects. Check back soon to see what I've been
+						building!
+					</p>
+				</div>
+			)
+		}
+	</section>
 </PageLayout>

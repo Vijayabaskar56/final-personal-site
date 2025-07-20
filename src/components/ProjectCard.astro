@@ -1,0 +1,186 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { Icon } from "astro-icon/components";
+
+interface Props {
+	project: CollectionEntry<"project">;
+	isPreview?: boolean;
+}
+
+const { project, isPreview = false } = Astro.props;
+
+// Background classes based on the background type
+const backgroundClasses = {
+	"gradient-blue": "bg-gradient-to-br from-blue-400 to-blue-600",
+	"gradient-purple": "bg-gradient-to-br from-purple-400 to-purple-600",
+	"gradient-green": "bg-gradient-to-br from-green-400 to-green-600",
+	"gradient-orange": "bg-gradient-to-br from-orange-400 to-orange-600",
+	"gradient-pink": "bg-gradient-to-br from-pink-400 to-pink-600",
+	"solid-blue": "bg-blue-500",
+	"solid-green": "bg-green-500",
+	"solid-purple": "bg-purple-500",
+	"solid-orange": "bg-orange-500",
+	"solid-pink": "bg-pink-500",
+	"solid-yellow": "bg-yellow-500",
+};
+
+// Status colors
+const statusColors = {
+	completed: "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200",
+	"in-progress": "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200",
+	planned: "bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200",
+};
+
+// Icon mapping for metrics
+const iconMap = {
+	download: "mdi:download",
+	star: "mdi:star",
+	users: "mdi:account-group",
+	heart: "mdi:heart",
+	eye: "mdi:eye",
+	code: "mdi:code-braces",
+	rocket: "mdi:rocket",
+	check: "mdi:check-circle",
+	clock: "mdi:clock",
+	trending: "mdi:trending-up",
+};
+
+const backgroundClass = backgroundClasses[project.data.background];
+const statusClass = statusColors[project.data.status];
+---
+
+<article
+	class="group relative overflow-hidden rounded-xl border border-zinc-200 bg-white shadow-sm transition-all duration-300 hover:shadow-lg dark:border-zinc-700 dark:bg-zinc-800"
+>
+	{/* Background with gradient/solid color */}
+	<div
+		class={`absolute inset-0 ${backgroundClass} opacity-10 group-hover:opacity-15 transition-opacity duration-300`}
+	>
+	</div>
+
+	<div class="relative p-6">
+		{/* Header */}
+		<div class="mb-4 flex items-start justify-between">
+			<div class="flex items-center gap-3">
+				<div
+					class={`flex h-12 w-12 items-center justify-center rounded-lg ${backgroundClass} text-white text-xl shadow-sm`}
+				>
+					{project.data.logo}
+				</div>
+				<div>
+					<h3 class="font-semibold text-zinc-900 dark:text-zinc-100">
+						{
+							isPreview ? (
+								<a href={`/projects/${project.id}/`} class="hover:text-accent transition-colors">
+									{project.data.title}
+								</a>
+							) : (
+								project.data.title
+							)
+						}
+					</h3>
+					<p class="text-sm text-zinc-500 dark:text-zinc-400">{project.data.year}</p>
+				</div>
+			</div>
+
+			{/* External link icon */}
+			{
+				project.data.link && (
+					<a
+						href={project.data.link}
+						target="_blank"
+						rel="noopener noreferrer"
+						class="hover:text-accent text-zinc-400 transition-colors"
+						aria-label={`Visit ${project.data.title}`}
+					>
+						<Icon name="mdi:open-in-new" class="h-5 w-5" />
+					</a>
+				)
+			}
+		</div>
+
+		{/* Description */}
+		<p class="mb-4 line-clamp-3 text-sm leading-relaxed text-zinc-600 dark:text-zinc-300">
+			{project.data.description}
+		</p>
+
+		{/* Tags */}
+		{
+			project.data.tags.length > 0 && (
+				<div class="mb-4 flex flex-wrap gap-2">
+					{project.data.tags.slice(0, 3).map((tag) => (
+						<span class="inline-flex items-center rounded-full bg-zinc-100 px-2.5 py-0.5 text-xs font-medium text-zinc-800 dark:bg-zinc-700 dark:text-zinc-200">
+							{tag}
+						</span>
+					))}
+					{project.data.tags.length > 3 && (
+						<span class="inline-flex items-center rounded-full bg-zinc-100 px-2.5 py-0.5 text-xs font-medium text-zinc-600 dark:bg-zinc-700 dark:text-zinc-400">
+							+{project.data.tags.length - 3}
+						</span>
+					)}
+				</div>
+			)
+		}
+
+		{/* Footer */}
+		<div class="flex items-center justify-between">
+			{/* Status badge */}
+			<span
+				class={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${statusClass}`}
+			>
+				{
+					project.data.status === "completed" && (
+						<Icon name="mdi:check-circle" class="mr-1 h-3 w-3" />
+					)
+				}
+				{project.data.status === "in-progress" && <Icon name="mdi:clock" class="mr-1 h-3 w-3" />}
+				{project.data.status === "planned" && <Icon name="mdi:calendar" class="mr-1 h-3 w-3" />}
+				{project.data.status.replace("-", " ")}
+			</span>
+
+			{/* Metrics or action buttons */}
+			<div class="flex items-center gap-3">
+				{
+					project.data.metrics && project.data.metrics.length > 0 ? (
+						<div class="flex items-center gap-2">
+							{project.data.metrics.slice(0, 2).map((metric) => (
+								<div class="flex items-center gap-1 text-xs text-zinc-500 dark:text-zinc-400">
+									<Icon
+										name={iconMap[metric.icon as keyof typeof iconMap] || "mdi:circle"}
+										class="h-3 w-3"
+									/>
+									<span>{metric.value}</span>
+								</div>
+							))}
+						</div>
+					) : (
+						<div class="flex items-center gap-2">
+							{project.data.github && (
+								<a
+									href={project.data.github}
+									target="_blank"
+									rel="noopener noreferrer"
+									class="hover:text-accent text-zinc-400 transition-colors"
+									aria-label="View on GitHub"
+								>
+									<Icon name="mdi:github" class="h-4 w-4" />
+								</a>
+							)}
+							{project.data.demo && (
+								<a
+									href={project.data.demo}
+									target="_blank"
+									rel="noopener noreferrer"
+									class="hover:text-accent text-zinc-400 transition-colors"
+									aria-label="View demo"
+								>
+									<Icon name="mdi:play-circle" class="h-4 w-4" />
+								</a>
+							)}
+						</div>
+					)
+				}
+			</div>
+		</div>
+	</div>
+</article>

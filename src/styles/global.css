@@ -39,6 +39,106 @@
 	}
 }
 
+:root {
+ --background: 0 0% 100%;
+ --foreground: 222.2222 47.3684% 11.1765%;
+ --card: 0 0% 100%;
+ --card-foreground: 222.2222 47.3684% 11.1765%;
+ --popover: 0 0% 100%;
+ --popover-foreground: 222.2222 47.3684% 11.1765%;
+ --primary: 175.3398 77.4436% 26.0784%;
+ --primary-foreground: 166.1538 76.4706% 96.6667%;
+ --secondary: 20.5405 90.2439% 48.2353%;
+ --secondary-foreground: 34.2857 100.0000% 91.7647%;
+ --muted: 210.0000 40.0000% 96.0784%;
+ --muted-foreground: 215.3846 16.3180% 46.8627%;
+ --accent: 210.0000 40.0000% 96.0784%;
+ --accent-foreground: 222.2222 47.3684% 11.1765%;
+ --destructive: 0 84.2365% 60.1961%;
+ --destructive-foreground: 210.0000 40.0000% 98.0392%;
+ --border: 214.2857 31.8182% 91.3725%;
+ --input: 214.2857 31.8182% 91.3725%;
+ --ring: 175.3398 77.4436% 26.0784%;
+ --chart-1: 173.4146 80.3922% 40%;
+ --chart-2: 24.5815 94.9791% 53.1373%;
+ --chart-3: 191.6471 91.3978% 36.4706%;
+ --chart-4: 258.3117 89.5349% 66.2745%;
+ --chart-5: 330.3659 81.1881% 60.3922%;
+ --sidebar: 210.0000 40.0000% 98.0392%;
+ --sidebar-foreground: 222.2222 47.3684% 11.1765%;
+ --sidebar-primary: 175.3398 77.4436% 26.0784%;
+ --sidebar-primary-foreground: 166.1538 76.4706% 96.6667%;
+ --sidebar-accent: 0 0% 100%;
+ --sidebar-accent-foreground: 222.2222 47.3684% 11.1765%;
+ --sidebar-border: 214.2857 31.8182% 91.3725%;
+ --sidebar-ring: 175.3398 77.4436% 26.0784%;
+ --font-sans: Geist;
+ --font-serif: Lora;
+ --font-mono: Geist Mono;
+ --radius: 0.5rem;
+ --shadow-2xs: 0px 2px 4px 0px hsl(0 0% 0% / 0.03);
+ --shadow-xs: 0px 2px 4px 0px hsl(0 0% 0% / 0.03);
+ --shadow-sm: 0px 2px 4px 0px hsl(0 0% 0% / 0.05), 0px 1px 2px -1px hsl(0 0% 0% / 0.05);
+ --shadow: 0px 2px 4px 0px hsl(0 0% 0% / 0.05), 0px 1px 2px -1px hsl(0 0% 0% / 0.05);
+ --shadow-md: 0px 2px 4px 0px hsl(0 0% 0% / 0.05), 0px 2px 4px -1px hsl(0 0% 0% / 0.05);
+ --shadow-lg: 0px 2px 4px 0px hsl(0 0% 0% / 0.05), 0px 4px 6px -1px hsl(0 0% 0% / 0.05);
+ --shadow-xl: 0px 2px 4px 0px hsl(0 0% 0% / 0.05), 0px 8px 10px -1px hsl(0 0% 0% / 0.05);
+ --shadow-2xl: 0px 2px 4px 0px hsl(0 0% 0% / 0.13);
+ --tracking-normal: 0rem;
+ --spacing: 0.25rem;
+}
+
+.dark {
+ --background: 0 0% 10.9804%;
+ --foreground: 214.2857 31.8182% 91.3725%;
+ --card: 0 0% 12.9412%;
+ --card-foreground: 214.2857 31.8182% 91.3725%;
+ --popover: 0 0% 12.9412%;
+ --popover-foreground: 214.2857 31.8182% 91.3725%;
+ --primary: 168.3871 83.7838% 78.2353%;
+ --primary-foreground: 165.7143 91.3043% 9.0196%;
+ --secondary: 30.6569 97.1631% 72.3529%;
+ --secondary-foreground: 13 81.0811% 14.5098%;
+ --muted: 215.2941 25.0000% 26.6667%;
+ --muted-foreground: 215.0000 20.2247% 65.0980%;
+ --accent: 215.2941 25.0000% 26.6667%;
+ --accent-foreground: 210.0000 40.0000% 98.0392%;
+ --destructive: 0 62.8205% 30.5882%;
+ --destructive-foreground: 210.0000 40.0000% 98.0392%;
+ --border: 0 0% 17.6471%;
+ --input: 0 0% 17.6471%;
+ --ring: 168.3871 83.7838% 78.2353%;
+ --chart-1: 168.3871 83.7838% 78.2353%;
+ --chart-2: 30.6569 97.1631% 72.3529%;
+ --chart-3: 186.9863 92.4051% 69.0196%;
+ --chart-4: 252.5000 94.7368% 85.0980%;
+ --chart-5: 327.4074 87.0968% 81.7647%;
+ --sidebar: 0 0% 10.9804%;
+ --sidebar-foreground: 214.2857 31.8182% 91.3725%;
+ --sidebar-primary: 168.3871 83.7838% 78.2353%;
+ --sidebar-primary-foreground: 165.7143 91.3043% 9.0196%;
+ --sidebar-accent: 215.2941 25.0000% 26.6667%;
+ --sidebar-accent-foreground: 210.0000 40.0000% 98.0392%;
+ --sidebar-border: 0 0% 17.6471%;
+ --sidebar-ring: 168.3871 83.7838% 78.2353%;
+ --font-sans: Geist;
+ --font-serif: Lora;
+ --font-mono: Geist Mono;
+ --radius: 0.5rem;
+ --shadow-2xs: 0px 2px 4px 0px hsl(0 0% 0% / 0.05);
+ --shadow-xs: 0px 2px 4px 0px hsl(0 0% 0% / 0.05);
+ --shadow-sm: 0px 2px 4px 0px hsl(0 0% 0% / 0.10), 0px 1px 2px -1px hsl(0 0% 0% / 0.10);
+ --shadow: 0px 2px 4px 0px hsl(0 0% 0% / 0.10), 0px 1px 2px -1px hsl(0 0% 0% / 0.10);
+ --shadow-md: 0px 2px 4px 0px hsl(0 0% 0% / 0.10), 0px 2px 4px -1px hsl(0 0% 0% / 0.10);
+ --shadow-lg: 0px 2px 4px 0px hsl(0 0% 0% / 0.10), 0px 4px 6px -1px hsl(0 0% 0% / 0.10);
+ --shadow-xl: 0px 2px 4px 0px hsl(0 0% 0% / 0.10), 0px 8px 10px -1px hsl(0 0% 0% / 0.10);
+ --shadow-2xl: 0px 2px 4px 0px hsl(0 0% 0% / 0.25);
+}
+
+body {
+ letter-spacing: var(--tracking-normal);
+}
+
 @layer components {
 	.cactus-link {
 		@apply hover:text-hover underline-offset-2 hover:underline;

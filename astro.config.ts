@@ -114,6 +114,32 @@ export default defineConfig({
 				access: "public",
 				optional: true,
 			}),
+			// Twitter/X API credentials
+			TWITTER_BEARER_TOKEN: envField.string({
+				context: "server",
+				access: "secret",
+				optional: true,
+			}),
+			TWITTER_API_KEY: envField.string({
+				context: "server",
+				access: "secret",
+				optional: true,
+			}),
+			TWITTER_API_SECRET: envField.string({
+				context: "server",
+				access: "secret",
+				optional: true,
+			}),
+			TWITTER_ACCESS_TOKEN: envField.string({
+				context: "server",
+				access: "secret",
+				optional: true,
+			}),
+			TWITTER_ACCESS_SECRET: envField.string({
+				context: "server",
+				access: "secret",
+				optional: true,
+			}),
 		},
 	},
 });

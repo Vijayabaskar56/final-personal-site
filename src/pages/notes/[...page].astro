@@ -1,11 +1,11 @@
 ---
 import { type CollectionEntry, getCollection } from "astro:content";
-import Pagination from "@/components/Paginator.astro";
-import Note from "@/components/note/Note.astro";
-import PageLayout from "@/layouts/Base.astro";
-import { collectionDateSort } from "@/utils/date";
 import type { GetStaticPaths, Page } from "astro";
 import { Icon } from "astro-icon/components";
+import Pagination from "@/components/Paginator.astro";
+import TwitterFeed from "@/components/TwitterFeed.astro";
+import PageLayout from "@/layouts/Base.astro";
+import { collectionDateSort } from "@/utils/date";
 
 export const getStaticPaths = (async ({ paginate }) => {
 	const MAX_NOTES_PER_PAGE = 10;
@@ -43,21 +43,21 @@ const paginationProps = {
 
 <PageLayout meta={meta}>
 	<section>
-		<h1 class="title mb-6 flex items-center gap-3">
-			Notes <a class="text-accent" href="/notes/rss.xml" target="_blank">
-				<span class="sr-only">RSS feed</span>
-				<Icon aria-hidden="true" class="h-6 w-6" focusable="false" name="mdi:rss" />
+		<h2 class="title mb-6 flex items-center gap-3">
+			Latest from X
+			<a
+				href={`https://twitter.com/Vijayabaskar56`}
+				target="_blank"
+				rel="noopener noreferrer"
+				class="text-accent hover:underline"
+				aria-label={`View Vijayabaskar56 on X (Twitter)`}
+			>
+				<Icon name="mdi:twitter" class="h-5 w-5" />
 			</a>
-		</h1>
-		<ul class="mt-6 space-y-8 text-start">
-			{
-				page.data.map((note) => (
-					<li class="">
-						<Note note={note} as="h2" isPreview />
-					</li>
-				))
-			}
-		</ul>
+		</h2>
+		{/* Twitter Feed - Replace 'your_username' with your actual X/Twitter username */}
+		<TwitterFeed username="Vijayabaskar56" count={5} showMetrics={true} />
+
 		<Pagination {...paginationProps} />
 	</section>
 </PageLayout>
