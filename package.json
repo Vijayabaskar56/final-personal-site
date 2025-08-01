@@ -21,7 +21,7 @@
 		"@astrojs/markdown-remark": "^6.3.3",
 		"@astrojs/mdx": "4.2.3",
 		"@astrojs/rss": "4.0.12",
-		"@astrojs/sitemap": "3.4.1",
+		"@astrojs/sitemap": "3.4.2",
 		"@img/sharp-win32-x64": "^0.33.5",
 		"@tailwindcss/vite": "^4.1.11",
 		"astro": "5.11.0",
