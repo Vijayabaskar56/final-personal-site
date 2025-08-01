@@ -22,7 +22,7 @@
 		"@astrojs/mdx": "4.2.3",
 		"@astrojs/rss": "4.0.12",
 		"@astrojs/sitemap": "3.4.1",
-		"@img/sharp-win32-x64": "^0.33.5",
+		"@img/sharp-win32-x64": "^0.34.3",
 		"@tailwindcss/vite": "^4.1.11",
 		"astro": "5.11.0",
 		"astro-expressive-code": "^0.41.3",
