@@ -5,8 +5,10 @@ function removeDupsAndLowerCase(array: string[]) {
 	return [...new Set(array.map((str) => str.toLowerCase()))];
 }
 
+const titleSchema = z.string().max(60);
+
 const baseSchema = z.object({
-	title: z.string().max(60),
+	title: titleSchema,
 });
 
 const post = defineCollection({
@@ -27,11 +29,11 @@ const post = defineCollection({
 				.string()
 				.or(z.date())
 				.transform((val) => new Date(val)),
-			stats: z.string().optional(),
 			updatedDate: z
 				.string()
 				.optional()
 				.transform((str) => (str ? new Date(str) : undefined)),
+			pinned: z.boolean().default(false),
 		}),
 });
 
@@ -46,44 +48,12 @@ const note = defineCollection({
 	}),
 });
 
-const project = defineCollection({
-	loader: glob({ base: "./src/content/project", pattern: "**/*.{md,mdx}" }),
-	schema: baseSchema.extend({
-		description: z.string(),
-		year: z.string(),
-		status: z
-			.enum(["completed", "in-progress", "planned"])
-			.default("completed"),
-		logo: z.string(), // emoji or icon name
-		background: z
-			.enum([
-				"gradient-blue",
-				"gradient-purple",
-				"gradient-green",
-				"gradient-orange",
-				"gradient-pink",
-				"solid-blue",
-				"solid-green",
-				"solid-purple",
-				"solid-orange",
-				"solid-pink",
-				"solid-yellow",
-			])
-			.default("gradient-blue"),
-		tags: z.array(z.string()).default([]).transform(removeDupsAndLowerCase),
-		metrics: z
-			.array(
-				z.object({
-					icon: z.string(),
-					value: z.string(),
-					label: z.string(),
-				}),
-			)
-			.optional(),
-		link: z.string().url().optional(),
-		github: z.string().url().optional(),
-		demo: z.string().url().optional(),
+const tag = defineCollection({
+	loader: glob({ base: "./src/content/tag", pattern: "**/*.{md,mdx}" }),
+	schema: z.object({
+		title: titleSchema.optional(),
+		description: z.string().optional(),
 	}),
 });
 
-export const collections = { post, note, project };
+export const collections = { post, note, tag };

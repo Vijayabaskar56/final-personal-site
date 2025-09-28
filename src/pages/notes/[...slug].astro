@@ -1,7 +1,9 @@
 ---
 import { getCollection } from "astro:content";
-import type { GetStaticPaths, InferGetStaticPropsType } from "astro";
+
+import Note from "@/components/note/Note.astro";
 import PageLayout from "@/layouts/Base.astro";
+import type { GetStaticPaths, InferGetStaticPropsType } from "astro";
 
 // if you're using an adaptor in SSR mode, getStaticPaths wont work -> https://docs.astro.build/en/guides/routing/#modifying-the-slug-example-for-ssr
 export const getStaticPaths = (async () => {
@@ -24,4 +26,6 @@ const meta = {
 };
 ---
 
-<PageLayout meta={meta} />
+<PageLayout meta={meta}>
+	<Note as="h1" note={note} />
+</PageLayout>

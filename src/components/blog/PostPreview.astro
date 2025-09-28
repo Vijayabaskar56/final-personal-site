@@ -15,22 +15,10 @@ const { as: Tag = "div", post, withDesc = false } = Astro.props;
 	class="min-w-30 font-semibold text-gray-600 dark:text-gray-400"
 	date={post.data.publishDate}
 />
-<Tag
-	class="grid grid-cols-[auto_1fr_auto] items-center gap-2 sm:grid-cols-[auto_auto_1fr_auto]"
->
+<Tag>
 	{post.data.draft && <span class="text-red-500">(Draft) </span>}
-	<a class="cactus-link" data-astro-prefetch href={`/posts/${post.id}/`}>
+	<a class="cactus-link" href={`/posts/${post.id}/`}>
 		{post.data.title}
 	</a>
-	<span></span>
-	<div
-		class="block h-px bg-[linear-gradient(90deg,var(--ui-border-color)_1px,transparent_1px)] bg-size-[4px_1px] bg-bottom bg-repeat-x [--ui-border-color:var(--color-gray-300)] dark:[--ui-border-color:var(--color-gray-700)]"
-	>
-	</div>
-	{
-		post.data.stats && (
-			<span class="relative block text-sm tracking-wide text-nowrap">{post.data.stats}</span>
-		)
-	}
 </Tag>
 {withDesc && <q class="line-clamp-3 italic">{post.data.description}</q>}
