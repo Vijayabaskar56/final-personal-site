@@ -3,6 +3,7 @@ title: "Example Project"
 description: "A sample project to demonstrate the project card design and functionality."
 year: "2024"
 status: "completed" # completed, in-progress, planned
+draft: true
 logo: "🚀" # emoji or icon name
 background: "gradient-blue" # gradient-blue, gradient-purple, solid-blue, solid-green, etc.
 tags: ["web", "react", "typescript"]
@@ -38,4 +39,4 @@ This is an example project that demonstrates the project card design. The conten
 
 ## Screenshots
 
-You can add screenshots and more detailed information here. 
+You can add screenshots and more detailed information here.

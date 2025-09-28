@@ -8,8 +8,10 @@ const meta = {
 	title: "Projects",
 };
 
-// Get all projects
-const allProjects = await getCollection("project");
+// Get all projects, filter out drafts in production
+const allProjects = await getCollection("project", ({ data }) => {
+	return import.meta.env.PROD ? !data.draft : true;
+});
 const sortedProjects = allProjects.sort((a, b) => {
 	// Sort by year first (newest first), then by title
 	const yearA = parseInt(a.data.year);

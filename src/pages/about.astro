@@ -1,24 +1,27 @@
 ---
+import { Image } from "astro:assets";
 import PageLayout from "@/layouts/Base.astro";
 
 const meta = {
-	description: "I'm a starter theme for Astro.build",
-	title: "About",
+  description: "I'm a starter theme for Astro.build",
+  title: "About",
 };
 ---
 
 <PageLayout meta={meta}>
-	<h1 class="title mb-6">About</h1>
-	<Image class="lg:float-right lg:ml-4 lg:w-2/5" src={img} alt="mountains" />
+  <h1 class="title mb-6">About</h1>
+  <!-- <Image class="lg:float-right lg:ml-4 lg:w-2/5" src={""} alt="mountains" /> -->
 
-	<p class="leading-[30px]">
-		Hey, I am <span style="color: #cb5c40;">Vijayabaskar</span>, a Full Stack Developer from India.
-		Passionate about breaking and building things from a young age, I have always been fascinated by
-		understanding how things work and rebuilding them. Programming became my ultimate playground for
-		this curiosity. I tackle challenges head-on, always finding solutions even in uncharted
-		territories. As a tech enthusiast, I stay updated with the latest trends. My team-oriented and
-		friendly nature allows me to fit seamlessly into any collaborative environment. I love engaging
-		in nerdy conversations about tech, morals, philosophy, and anime. Let's connect to build awesome
-		stuff and have crazy nerdy talks!
-	</p>
+  <p class="leading-[30px]">
+    Hey, I am <span style="color: #cb5c40;">Vijayabaskar</span>, a Full Stack
+    Developer from India. Passionate about breaking and building things from a
+    young age, I have always been fascinated by understanding how things work
+    and rebuilding them. Programming became my ultimate playground for this
+    curiosity. I tackle challenges head-on, always finding solutions even in
+    uncharted territories. As a tech enthusiast, I stay updated with the latest
+    trends. My team-oriented and friendly nature allows me to fit seamlessly
+    into any collaborative environment. I love engaging in nerdy conversations
+    about tech, morals, philosophy, and anime. Let's connect to build awesome
+    stuff and have crazy nerdy talks!
+  </p>
 </PageLayout>

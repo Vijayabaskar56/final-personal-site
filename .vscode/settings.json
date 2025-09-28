@@ -15,6 +15,9 @@
 	},
 	"typescript.tsdk": "node_modules/typescript/lib",
 	"astro.content-intellisense": true,
+	"debug.javascript.defaultRuntimeExecutable": {
+		"pwa-node": "/home/vijay/.local/share/mise/shims/node"
+	},
 	"files.associations": {
 		"*.css": "tailwindcss"
 	},
