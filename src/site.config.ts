@@ -20,7 +20,7 @@ export const siteConfig: SiteConfig = {
 	// Meta property, found in src/components/BaseHead.astro L:42
 	ogLocale: "en_GB",
 	// Used to construct the meta title property found in src/components/BaseHead.astro L:11, and webmanifest name found in astro.config.ts L:42
-	title: "Vijayabaskar Personal Site",
+	title: "Vijayabaskar",
 	// ! Please remember to replace the following site property with your own domain, used in astro.config.ts
 	url: "https://vijayabaskar.xyz",
 };
@@ -68,11 +68,8 @@ export const expressiveCodeOptions: AstroExpressiveCodeOptions = {
 		// generate theme CSS selectors compatible with cactus-theme dark mode switch
 		if (styleVariants.length >= 2) {
 			const baseTheme = styleVariants[0]?.theme;
-			const altTheme = styleVariants.find(
-				(v) => v.theme.type !== baseTheme?.type,
-			)?.theme;
-			if (theme === baseTheme || theme === altTheme)
-				return `[data-theme='${theme.type}']`;
+			const altTheme = styleVariants.find((v) => v.theme.type !== baseTheme?.type)?.theme;
+			if (theme === baseTheme || theme === altTheme) return `[data-theme='${theme.type}']`;
 		}
 		// return default selector
 		return `[data-theme="${theme.name}"]`;

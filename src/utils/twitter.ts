@@ -37,10 +37,7 @@ export interface TwitterUser {
 const tweetCache = new Map<string, { tweets: Tweet[]; timestamp: number }>();
 const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
 
-export async function getLatestTweets(
-	username: string,
-	count: number = 10,
-): Promise<Tweet[]> {
+export async function getLatestTweets(username: string, count: number = 10): Promise<Tweet[]> {
 	// Check cache first
 	const cacheKey = `${username}-${count}`;
 	const cached = tweetCache.get(cacheKey);
@@ -56,10 +53,7 @@ export async function getLatestTweets(
 		const accessToken = import.meta.env.TWITTER_ACCESS_TOKEN;
 		const accessSecret = import.meta.env.TWITTER_ACCESS_SECRET;
 		console.log(bearerToken, "bearerToken");
-		if (
-			!bearerToken &&
-			(!apiKey || !apiSecret || !accessToken || !accessSecret)
-		) {
+		if (!bearerToken && (!apiKey || !apiSecret || !accessToken || !accessSecret)) {
 			console.warn("Twitter API credentials not found. Skipping tweet fetch.");
 			return [];
 		}
@@ -106,9 +100,7 @@ export async function getLatestTweets(
 	} catch (error: any) {
 		// Handle rate limiting specifically
 		if (error.code === 429) {
-			console.warn(
-				"Twitter API rate limit exceeded. Skipping tweet fetch for now.",
-			);
+			console.warn("Twitter API rate limit exceeded. Skipping tweet fetch for now.");
 			return [];
 		}
 
@@ -118,24 +110,60 @@ export async function getLatestTweets(
 	}
 }
 
-export function formatTweetText(text: string): string {
-	// Convert URLs to clickable links
-	let formattedText = text.replace(
-		/(https?:\/\/[^\s]+)/g,
-		'<a href="$1" target="_blank" rel="noopener noreferrer" class="text-accent hover:underline">$1</a>',
-	);
+export function formatTweetText(tweet: Tweet): string {
+	let formattedText = tweet.text;
 
-	// Convert hashtags to styled elements
-	formattedText = formattedText.replace(
-		/#(\w+)/g,
-		'<span class="text-accent font-semibold">#$1</span>',
-	);
+	// Convert line breaks to <br>
+	formattedText = formattedText.replace(/\n/g, "<br>");
 
-	// Convert mentions to styled elements
-	formattedText = formattedText.replace(
-		/@(\w+)/g,
-		'<span class="text-accent font-semibold">@$1</span>',
-	);
+	// Use entities if available for better accuracy
+	if (tweet.entities) {
+		// Replace URLs with expanded versions
+		if (tweet.entities.urls) {
+			for (const urlEntity of tweet.entities.urls) {
+				formattedText = formattedText.replace(
+					urlEntity.url,
+					`<a href="${urlEntity.expanded_url}" target="_blank" rel="noopener noreferrer" class="text-accent hover:underline">${urlEntity.display_url}</a>`,
+				);
+			}
+		}
+
+		// Replace hashtags
+		if (tweet.entities.hashtags) {
+			for (const hashtag of tweet.entities.hashtags) {
+				const regex = new RegExp(`#${hashtag.tag}\\b`, "gi");
+				formattedText = formattedText.replace(
+					regex,
+					`<span class="text-accent font-semibold">#${hashtag.tag}</span>`,
+				);
+			}
+		}
+
+		// Replace mentions
+		if (tweet.entities.mentions) {
+			for (const mention of tweet.entities.mentions) {
+				const regex = new RegExp(`@${mention.username}\\b`, "gi");
+				formattedText = formattedText.replace(
+					regex,
+					`<span class="text-accent font-semibold">@${mention.username}</span>`,
+				);
+			}
+		}
+	} else {
+		// Fallback to regex if no entities
+		formattedText = formattedText.replace(
+			/(https?:\/\/[^\s]+)/g,
+			'<a href="$1" target="_blank" rel="noopener noreferrer" class="text-accent hover:underline">$1</a>',
+		);
+		formattedText = formattedText.replace(
+			/#(\w+)/g,
+			'<span class="text-accent font-semibold">#$1</span>',
+		);
+		formattedText = formattedText.replace(
+			/@(\w+)/g,
+			'<span class="text-accent font-semibold">@$1</span>',
+		);
+	}
 
 	return formattedText;
 }

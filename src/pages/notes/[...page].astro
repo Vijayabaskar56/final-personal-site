@@ -2,8 +2,8 @@
 import { type CollectionEntry, getCollection } from "astro:content";
 import type { GetStaticPaths, Page } from "astro";
 import { Icon } from "astro-icon/components";
-import Note from "@/components/note/Note.astro";
 import Pagination from "@/components/Paginator.astro";
+import TwitterFeed from "@/components/TwitterFeed.astro";
 import PageLayout from "@/layouts/Base.astro";
 import { collectionDateSort } from "@/utils/date";
 
@@ -60,7 +60,7 @@ const paginationProps = {
     {
       /* Twitter Feed - Replace 'your_username' with your actual X/Twitter username */
     }
-    <!-- <TwitterFeed username="Vijayabaskar56" count={5} showMetrics={true} /> -->
+    <TwitterFeed username="Vijayabaskar56" count={5} showMetrics={true} />
 
     <Pagination {...paginationProps} />
   </section>

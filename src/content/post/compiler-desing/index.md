@@ -5,6 +5,9 @@ publishDate: "01 Feb 2025"
 tags: ["markdown", "admonitions"]
 draft : false
 stats : 14k
+coverImage:
+  src: "./compiler.png"
+  alt: "Compiler Design"
 ---
 
 
@@ -26,7 +29,7 @@ A compiler operates in distinct phases, each performing a specific task to conve
 
 Below is a sequence diagram illustrating the flow of data and interactions between the various components of a compiler:
 
-![Compiler Flow Diagram](./compiler-desing.png)
+![Compiler Flow Diagram](./compiler.png)
 
 ## **Phase Breakdown**
 

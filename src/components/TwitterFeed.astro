@@ -12,39 +12,6 @@ const { username, count = 5, showMetrics = true } = Astro.props;
 
 // Fetch tweets
 let tweets = await getLatestTweets(username, count);
-
-// Add dummy tweets for development/testing
-if (tweets.length === 0 || import.meta.env.DEV) {
-	const dummyTweets = [
-		{
-			id: "dummy1",
-			text: "Just shipped a new feature! 🚀 Excited to see how the community uses it. #webdev #react",
-			created_at: new Date(Date.now() - 86400000).toISOString(), // 1 day ago
-			public_metrics: {
-				like_count: 42,
-				retweet_count: 12,
-				reply_count: 8
-			}
-		},
-		{
-			id: "dummy2",
-			text: "Working on some cool projects with Astro and Tailwind. The developer experience is amazing! ✨",
-			created_at: new Date(Date.now() - 172800000).toISOString(), // 2 days ago
-			public_metrics: {
-				like_count: 28,
-				retweet_count: 5,
-				reply_count: 3
-			}
-		}
-	];
-
-	if (tweets.length === 0) {
-		tweets = dummyTweets.slice(0, count);
-	} else if (import.meta.env.DEV) {
-		// In dev, show dummy tweets first, then real ones
-		tweets = [...dummyTweets, ...tweets].slice(0, count);
-	}
-}
 ---
 
 {
@@ -84,8 +51,8 @@ if (tweets.length === 0 || import.meta.env.DEV) {
 								</div>
 
 								<div
-									class="prose prose-sm prose-cactus max-w-none [&>p:last-of-type]:mb-0"
-									set:html={formatTweetText(tweet.text)}
+									class="text-zinc-900 dark:text-zinc-100"
+									set:html={formatTweetText(tweet)}
 								/>
 
 								{showMetrics && tweet.public_metrics && (
