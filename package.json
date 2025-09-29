@@ -38,6 +38,7 @@
 		"satori": "0.18.2",
 		"satori-html": "^0.3.2",
 		"sharp": "^0.34.4",
+		"twitter-api-v2": "^1.27.0",
 		"unified": "^11.0.5",
 		"unist-util-visit": "^5.0.0"
 	},
@@ -63,6 +64,11 @@
 		"overrides": {
 			"sharp": "^0.34.2"
 		},
-		"onlyBuiltDependencies": ["@biomejs/biome", "@tailwindcss/oxide", "esbuild", "sharp"]
+		"onlyBuiltDependencies": [
+			"@biomejs/biome",
+			"@tailwindcss/oxide",
+			"esbuild",
+			"sharp"
+		]
 	}
 }
