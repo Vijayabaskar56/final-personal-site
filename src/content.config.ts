@@ -56,43 +56,4 @@ const tag = defineCollection({
 	}),
 });
 
-const project = defineCollection({
-	loader: glob({ base: "./src/content/project", pattern: "**/*.{md,mdx}" }),
-	schema: baseSchema.extend({
-		description: z.string(),
-		year: z.string(),
-		status: z.enum(["completed", "in-progress", "planned"]).default("completed"),
-		draft: z.boolean().default(false),
-		logo: z.string(), // emoji or icon name
-		background: z
-			.enum([
-				"gradient-blue",
-				"gradient-purple",
-				"gradient-green",
-				"gradient-orange",
-				"gradient-pink",
-				"solid-blue",
-				"solid-green",
-				"solid-purple",
-				"solid-orange",
-				"solid-pink",
-				"solid-yellow",
-			])
-			.default("gradient-blue"),
-		tags: z.array(z.string()).default([]).transform(removeDupsAndLowerCase),
-		metrics: z
-			.array(
-				z.object({
-					icon: z.string(),
-					value: z.string(),
-					label: z.string(),
-				}),
-			)
-			.optional(),
-		link: z.string().url().optional(),
-		github: z.string().url().optional(),
-		demo: z.string().url().optional(),
-	}),
-});
-
-export const collections = { post, note, tag, project };
+export const collections = { post, note, tag };

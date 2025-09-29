@@ -1,11 +1,14 @@
 .admonition {
 	--admonition-color: var(--tw-prose-quotes);
-	@apply border-s-2 border-(--admonition-color) py-4 ps-4;
+	@apply border-s-2 py-4 ps-4;
+	border-color: var(--admonition-color);
 
 	.admonition-title {
-		@apply my-0! flex items-center gap-2 text-base font-bold text-(--admonition-color) capitalize;
+		@apply my-0! flex items-center gap-2 text-base font-bold capitalize;
+		color: var(--admonition-color);
 		&:before {
-			@apply inline-block h-4 w-4 shrink-0 overflow-visible bg-(--admonition-color) align-middle content-[''];
+			@apply inline-block h-4 w-4 shrink-0 overflow-visible align-middle content-[''];
+			background-color: var(--admonition-color);
 			mask-size: contain;
 			mask-position: center;
 			mask-repeat: no-repeat;

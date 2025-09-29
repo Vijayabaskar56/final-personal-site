@@ -1,24 +1,12 @@
 ---
-import { getCollection } from "astro:content";
-import ProjectCard from "@/components/ProjectCard.astro";
+import GitHubProjectCard from "@/components/GitHubProjectCard.astro";
 import PageLayout from "@/layouts/Base.astro";
+import { projectRepos } from "@/data/projects";
 
 const meta = {
 	description: "Explore my projects and creative work",
 	title: "Projects",
 };
-
-// Get all projects, filter out drafts in production
-const allProjects = await getCollection("project", ({ data }) => {
-	return import.meta.env.PROD ? !data.draft : true;
-});
-const sortedProjects = allProjects.sort((a, b) => {
-	// Sort by year first (newest first), then by title
-	const yearA = parseInt(a.data.year);
-	const yearB = parseInt(b.data.year);
-	if (yearA !== yearB) return yearB - yearA;
-	return a.data.title.localeCompare(b.data.title);
-});
 ---
 
 <PageLayout meta={meta}>
@@ -30,10 +18,10 @@ const sortedProjects = allProjects.sort((a, b) => {
 		</p>
 
 		{
-			allProjects.length > 0 ? (
-				<div class="grid gap-6 sm:grid-cols-1 lg:grid-cols-2">
-					{sortedProjects.map((project) => (
-						<ProjectCard project={project} isPreview={true} />
+			projectRepos.length > 0 ? (
+				<div class="flex flex-col gap-6">
+					{projectRepos.map((repoUrl) => (
+						<GitHubProjectCard repoUrl={repoUrl} />
 					))}
 				</div>
 			) : (
