@@ -1,0 +1,144 @@
+<layout-toggle class="ms-2 sm:ms-4">
+  <button
+    class="hover:text-accent relative h-9 w-9 cursor-pointer rounded-md p-2"
+    type="button"
+  >
+    <span class="sr-only">Toggle Layout Width</span>
+    <!-- Expand icon (shown when narrow) - arrows pointing outward -->
+    <svg
+      aria-hidden="true"
+      class="expand-icon absolute start-1/2 top-1/2 h-7 w-7 -translate-x-1/2 -translate-y-1/2 scale-100 opacity-100 transition-all"
+      fill="none"
+      focusable="false"
+      id="expand-svg"
+      stroke="currentColor"
+      stroke-width="1.5"
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"
+        stroke-linecap="round"
+        stroke-linejoin="round"></path>
+    </svg>
+    <!-- Collapse icon (shown when expanded) - arrows pointing inward -->
+    <svg
+      aria-hidden="true"
+      class="collapse-icon absolute start-1/2 top-1/2 h-7 w-7 -translate-x-1/2 -translate-y-1/2 scale-0 opacity-0 transition-all"
+      fill="none"
+      focusable="false"
+      id="collapse-svg"
+      stroke="currentColor"
+      stroke-width="1.5"
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"
+        stroke-linecap="round"
+        stroke-linejoin="round"></path>
+    </svg>
+  </button>
+</layout-toggle>
+
+<script>
+  const STORAGE_KEY = "layout-expanded";
+  const LAYOUT_EXPANDED_CLASS = "layout-expanded";
+
+  function isLayoutExpanded(): boolean {
+    if (typeof window === "undefined") return false;
+    const stored = localStorage.getItem(STORAGE_KEY);
+    return stored === "true";
+  }
+
+  function setLayoutExpanded(expanded: boolean) {
+    if (typeof window === "undefined") return;
+    localStorage.setItem(STORAGE_KEY, String(expanded));
+    const body = document.body;
+    const html = document.documentElement;
+
+    if (expanded) {
+      // Update CSS variable immediately to prevent layout shift
+      html.style.setProperty("--layout-max-width", "72rem");
+      html.classList.add(LAYOUT_EXPANDED_CLASS);
+      html.setAttribute("data-layout-expanded", "true");
+      body.classList.add(LAYOUT_EXPANDED_CLASS);
+      body.classList.remove("max-w-3xl");
+      body.classList.add("max-w-6xl");
+    } else {
+      // Update CSS variable immediately
+      html.style.setProperty("--layout-max-width", "48rem");
+      html.classList.remove(LAYOUT_EXPANDED_CLASS);
+      html.removeAttribute("data-layout-expanded");
+      body.classList.remove(LAYOUT_EXPANDED_CLASS);
+      body.classList.remove("max-w-6xl");
+      body.classList.add("max-w-3xl");
+    }
+    // Dispatch event for other components to listen
+    document.dispatchEvent(
+      new CustomEvent("layout-change", {
+        detail: { expanded },
+      }),
+    );
+  }
+
+  class LayoutToggle extends HTMLElement {
+    #expandIcon: SVGElement | null;
+    #collapseIcon: SVGElement | null;
+    #button: HTMLButtonElement | null;
+
+    constructor() {
+      super();
+      this.#button = this.querySelector<HTMLButtonElement>("button");
+      this.#expandIcon = this.querySelector<SVGElement>(".expand-icon");
+      this.#collapseIcon = this.querySelector<SVGElement>(".collapse-icon");
+
+      if (this.#button) {
+        // Set initial state
+        const expanded = isLayoutExpanded();
+        this.#button.setAttribute("aria-pressed", String(expanded));
+        if (expanded) {
+          document.body.classList.add(LAYOUT_EXPANDED_CLASS);
+        }
+        this.updateIconVisibility(expanded);
+
+        // Button event
+        this.#button.addEventListener("click", () => {
+          const currentExpanded = document.body.classList.contains(
+            LAYOUT_EXPANDED_CLASS,
+          );
+          const newExpanded = !currentExpanded;
+          setLayoutExpanded(newExpanded);
+          this.#button?.setAttribute("aria-pressed", String(newExpanded));
+          this.updateIconVisibility(newExpanded);
+        });
+
+        // Listen for layout changes from other instances
+        document.addEventListener("layout-change", ((e: CustomEvent) => {
+          this.updateIconVisibility(e.detail.expanded);
+          this.#button?.setAttribute("aria-pressed", String(e.detail.expanded));
+        }) as EventListener);
+      } else {
+        console.warn("Layout Toggle: No button found");
+      }
+    }
+
+    updateIconVisibility(expanded: boolean) {
+      if (this.#expandIcon && this.#collapseIcon) {
+        if (expanded) {
+          this.#expandIcon.classList.remove("scale-100", "opacity-100");
+          this.#expandIcon.classList.add("scale-0", "opacity-0");
+          this.#collapseIcon.classList.remove("scale-0", "opacity-0");
+          this.#collapseIcon.classList.add("scale-100", "opacity-100");
+        } else {
+          this.#expandIcon.classList.remove("scale-0", "opacity-0");
+          this.#expandIcon.classList.add("scale-100", "opacity-100");
+          this.#collapseIcon.classList.remove("scale-100", "opacity-100");
+          this.#collapseIcon.classList.add("scale-0", "opacity-0");
+        }
+      }
+    }
+  }
+
+  customElements.define("layout-toggle", LayoutToggle);
+</script>

@@ -1,6 +1,6 @@
 ---
-import { generateToc } from "@/utils/generateToc";
 import type { MarkdownHeading } from "astro";
+import { generateToc } from "@/utils/generateToc";
 import TOCHeading from "./TOCHeading.astro";
 
 interface Props {
@@ -12,11 +12,22 @@ const { headings } = Astro.props;
 const toc = generateToc(headings);
 ---
 
-<details open class="lg:sticky lg:top-12 lg:order-2 lg:-me-32 lg:basis-64">
-	<summary class="title hover:marker:text-accent cursor-pointer text-lg">Table of Contents</summary>
+<details
+	open
+	class="lg:sticky lg:top-12 lg:order-2 lg:-me-32 lg:basis-64 toc-container"
+>
+	<summary class="title hover:marker:text-accent cursor-pointer text-lg"
+		>Table of Contents</summary
+	>
 	<nav class="ms-4 lg:w-full">
 		<ol class="mt-4">
 			{toc.map((heading) => <TOCHeading heading={heading} />)}
 		</ol>
 	</nav>
 </details>
+
+<style>
+	body.layout-expanded .toc-container {
+		flex-basis: 20rem; /* basis-80 equivalent */
+	}
+</style>

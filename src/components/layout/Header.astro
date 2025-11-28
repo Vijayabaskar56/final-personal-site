@@ -1,4 +1,5 @@
 ---
+import LayoutToggle from "@/components/LayoutToggle.astro";
 import Search from "@/components/Search.astro";
 import ThemeToggle from "@/components/ThemeToggle.astro";
 import { menuLinks } from "@/site.config";
@@ -78,6 +79,7 @@ import { siteConfig } from "../../site.config";
     </nav>
   </div>
   <Search />
+  <LayoutToggle />
   <ThemeToggle />
   <mobile-button>
     <button
