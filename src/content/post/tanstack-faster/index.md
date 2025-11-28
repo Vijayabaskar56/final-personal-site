@@ -1,5 +1,5 @@
 ---
-title: Tanstack Faster
+title: Sharing my Learning and Experience Building Tanstack Faster
 description: "Sharing my Learning on Building TanstackFaster, inspired by NextFaster, powered by Cloudflare's global edge network, creates a user experience that feels instantaneous while remaining cost-effective at scale."
 draft: false
 publishDate: 28 Nov 2025
@@ -39,7 +39,7 @@ Fast performance is achieved mainly through 3 layers of optimization.
 
 ## Image Optimization
 
-| PS: I really wish Tanstack Start has a Image component similar to NextJS, CloudFlare Image Transformation is not Great thing and it still takes average of 300ms to load 
+| PS: I really wish Tanstack Start has a Image component similar to NextJS, CloudFlare Image Transformation is not Great thing and it still takes average of 300ms.
 
 Images are typically the heaviest assets when dealing with 1M products. I implemented a multi-faceted image optimization strategy that addresses loading performance, bandwidth efficiency, and user experience. I used a combination of techniques involving pre-fetching images on hover similar to NextFaster, but only a limited number of them to avoid network waterfalls, by dynamically adjusting prefetching behavior based on device capabilities and LRU cache for duplicate prevention.
 ```tsx
