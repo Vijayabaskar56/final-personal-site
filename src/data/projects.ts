@@ -1,6 +1,7 @@
 // GitHub repositories to display as projects
 export const projectRepos = [
 	"https://github.com/Vijayabaskar56/tanstack-builder",
+	"https://github.com/Vijayabaskar56/tanstack-start-faster",
 	"https://github.com/Vijayabaskar56/klustherthon-64",
 	"https://github.com/Vijayabaskar56/100x-microblogging-platform",
 	"https://github.com/Vijayabaskar56/student-attedence-management",
